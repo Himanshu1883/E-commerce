@@ -80,7 +80,7 @@ function Cart() {
 
           <div className="mt-4">
             <h4>Total: ₹{total.toFixed(2)}</h4>
-            <Link to="/payment" className="btn btn-success mt-2">
+            <Link to="/details" className="btn btn-success mt-2">
               Proceed to Checkout
             </Link>
           </div>
