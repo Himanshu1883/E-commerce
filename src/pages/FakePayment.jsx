@@ -1,94 +1,108 @@
-// src/pages/FakePayment.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const FakePayment = () => {
-    const navigate = useNavigate();
-    const cartTotal = useSelector((state) => state.cart.totalAmount);
-
-    const [form, setForm] = useState({
-        cardNumber: '',
+function FakePayment() {
+    const cart = useSelector((state) => state.cart.items);
+    const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const [addressInfo, setAddressInfo] = useState({
         name: '',
-        cvv: '',
-        expiry: '',
+        mobile: '',
+        address: '',
+        city: '',
+        pincode: '',
     });
 
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        setAddressInfo({ ...addressInfo, [e.target.name]: e.target.value });
     };
 
-    const handlePayment = () => {
-        const { cardNumber, name, cvv, expiry } = form;
-        if (cardNumber && name && cvv && expiry) {
-            alert('💳 Payment Successful!');
-            navigate('/thank-you');
+    const handleAddressSubmit = (e) => {
+        e.preventDefault();
+        if (
+            addressInfo.name &&
+            addressInfo.mobile &&
+            addressInfo.address &&
+            addressInfo.city &&
+            addressInfo.pincode
+        ) {
+            navigate('/payment');
         } else {
-            alert('Please fill all fields');
+            alert('Please fill in all fields.');
         }
     };
 
     return (
         <div className="container mt-5">
-            <div className="card p-4 shadow mx-auto" style={{ maxWidth: '500px' }}>
-                <h3 className="text-center mb-4">Fake Payment</h3>
-                <p><strong>Total Amount:</strong> ₹{cartTotal}</p>
-
+            <h3 className="mb-3">Enter Shipping Address</h3>
+            <form onSubmit={handleAddressSubmit}>
                 <div className="mb-3">
-                    <label className="form-label">Card Number</label>
+                    <label className="form-label">Full Name</label>
                     <input
                         type="text"
-                        className="form-control"
-                        name="cardNumber"
-                        placeholder="1234 5678 9012 3456"
-                        value={form.cardNumber}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label className="form-label">Cardholder Name</label>
-                    <input
-                        type="text"
-                        className="form-control"
                         name="name"
-                        placeholder="Your Name"
-                        value={form.name}
+                        className="form-control"
+                        value={addressInfo.name}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
-                <div className="row">
-                    <div className="col-6 mb-3">
-                        <label className="form-label">CVV</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="cvv"
-                            placeholder="123"
-                            value={form.cvv}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="col-6 mb-3">
-                        <label className="form-label">Expiry (MM/YY)</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="expiry"
-                            placeholder="MM/YY"
-                            value={form.expiry}
-                            onChange={handleChange}
-                        />
-                    </div>
+                <div className="mb-3">
+                    <label className="form-label">Mobile Number</label>
+                    <input
+                        type="text"
+                        name="mobile"
+                        className="form-control"
+                        value={addressInfo.mobile}
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
 
-                <button className="btn btn-primary w-100" onClick={handlePayment}>
-                    Pay Now
+                <div className="mb-3">
+                    <label className="form-label">Full Address</label>
+                    <textarea
+                        name="address"
+                        className="form-control"
+                        value={addressInfo.address}
+                        onChange={handleChange}
+                        required
+                    ></textarea>
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">City</label>
+                    <input
+                        type="text"
+                        name="city"
+                        className="form-control"
+                        value={addressInfo.city}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Pincode</label>
+                    <input
+                        type="text"
+                        name="pincode"
+                        className="form-control"
+                        value={addressInfo.pincode}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
+                <button type="submit" className="btn btn-primary">
+                    Proceed to Payment
                 </button>
-            </div>
+            </form>
         </div>
     );
-};
+}
 
 export default FakePayment;

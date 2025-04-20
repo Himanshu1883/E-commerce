@@ -10,6 +10,7 @@ import CategoryProducts from './pages/CategoryProducts';
 import FakePayment from './pages/FakePayment';
 import ThankYou from './pages/ThankYou';
 import 'react-toastify/dist/ReactToastify.css';
+import Payment from './pages/Payment';
 
 function App() {
   return (
@@ -22,8 +23,9 @@ function App() {
         <Route path="/add" element={<AddProduct />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/category/:categoryName" element={<CategoryProducts />} />
-        <Route path="/payment" element={<FakePayment />} />
+        <Route path="/details" element={<FakePayment />} />
         <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </>
   )
