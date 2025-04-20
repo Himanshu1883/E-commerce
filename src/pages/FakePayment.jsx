@@ -31,7 +31,7 @@ const FakePayment = () => {
     return (
         <div className="container mt-5">
             <div className="card p-4 shadow mx-auto" style={{ maxWidth: '500px' }}>
-                <h3 className="text-center mb-4">Fake Payment</h3>
+                <h3 className="text-center mb-4">Payment</h3>
                 <p><strong>Total Amount:</strong> ₹{cartTotal}</p>
 
                 <div className="mb-3">
