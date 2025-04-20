@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -39,3 +40,46 @@ const cartSlice = createSlice({
 export const { addToCart, removeFromCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;
+=======
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+    items: []
+};
+
+const cartSlice = createSlice({
+    name: 'cart',
+    initialState,
+    reducers: {
+        addToCart: (state, action) => {
+            const item = action.payload;
+            const existingItem = state.items.find((i) => i.id === item.id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;  // If item exists, increment the quantity
+            } else {
+                state.items.push({ ...item, quantity: 1 });
+            }
+        },
+        removeFromCart: (state, action) => {
+            state.items = state.items.filter((item) => item.id !== action.payload);
+        },
+        incrementQuantity: (state, action) => {
+            const item = state.items.find(i => i.id === action.payload);
+            if (item) {
+                item.quantity += 1;
+            }
+        },
+        decrementQuantity: (state, action) => {
+            const item = state.items.find(i => i.id === action.payload);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+            }
+        },
+    }
+});
+
+export const { addToCart, removeFromCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
+
+export default cartSlice.reducer;
+>>>>>>> 3ee5ce2c11e67ef438a0f1bf6266aa913f7b6820
