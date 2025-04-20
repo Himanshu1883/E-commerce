@@ -1,0 +1,38 @@
+/* Search and Suggestions Styling */
+.z-index-dropdown {
+    z-index: 1050;
+}
+
+.hover-bg-light:hover {
+    background-color: #f8f9fa;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Product Card Styling */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.badge:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 992px) {
+    .navbar .dropdown-menu {
+        background-color: transparent;
+        border: none;
+    }
+
+    .navbar .dropdown-item {
+        color: rgba(255, 255, 255, 0.55);
+    }
+
+    .navbar .dropdown-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+}
