@@ -1,0 +1,46 @@
+.carousel_custom {
+  background-image: url('https://images.pexels.com/photos/11829358/pexels-photo-11829358.jpeg?auto=compress&cs=tinysrgb&w=600');
+  background-size: cover;
+  height: 220px;
+}
+
+.ctext {
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  color: azure;
+  text-align: center;
+}
+
+.cbutton {
+  width: 20%;
+  margin-left: 40%;
+}
+
+.z-index-dropdown {
+  z-index: 1050;
+}
+
+.hover-bg-light:hover {
+  background-color: #f8f9fa;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.hover-bg-light:hover {
+  background-color: #f8f9fa;
+}
+
+.z-3 {
+  z-index: 1000;
+}
+
+/* Navbar.css */
+.hover-bg-light:hover {
+  background-color: #f8f9fa;
+}
+
+.z-3 {
+  z-index: 1050;
+}
