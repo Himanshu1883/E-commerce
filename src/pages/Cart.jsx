@@ -1,11 +1,19 @@
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFromCart, incrementQuantity, decrementQuantity } from '../store/slices/cartSlice';
+import {
+  removeFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} from '../store/slices/cartSlice';
 import { Link } from 'react-router-dom';
 
 function Cart() {
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart.items);
-  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const cart = useSelector((state) => state.cart.items);
+  const total = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   const handleRemove = (id) => {
     dispatch(removeFromCart(id));
@@ -37,7 +45,7 @@ function Cart() {
                     src={item.image}
                     className="card-img-top"
                     alt={item.title}
-                    style={{ objectFit: 'cover', height: '200px' }} // Ensure images are of the same height
+                    style={{ objectFit: 'cover', height: '200px' }}
                   />
                   <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{item.title}</h5>
@@ -69,8 +77,13 @@ function Cart() {
               </div>
             ))}
           </div>
-          <h4 className="mt-4">Total: ₹{total.toFixed(2)}</h4>
-          <button className="btn btn-primary mt-2">Proceed to Checkout</button>
+
+          <div className="mt-4">
+            <h4>Total: ₹{total.toFixed(2)}</h4>
+            <Link to="/payment" className="btn btn-success mt-2">
+              Proceed to Checkout
+            </Link>
+          </div>
         </>
       )}
     </div>

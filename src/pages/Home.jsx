@@ -93,7 +93,7 @@ function Home() {
             image: product.image,
             quantity: 1,
         }));
-        navigate('/');
+        navigate('/payment');
     };
 
     useEffect(() => {

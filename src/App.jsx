@@ -7,6 +7,8 @@ import Cart from './pages/Cart';
 import AddProduct from './pages/AddProduct';
 import SearchResults from './pages/SearchResults';
 import CategoryProducts from './pages/CategoryProducts';
+import FakePayment from './pages/FakePayment';
+import ThankYou from './pages/ThankYou';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
         <Route path="/add" element={<AddProduct />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/category/:categoryName" element={<CategoryProducts />} />
+        <Route path="/payment" element={<FakePayment />} />
+        <Route path="/thank-you" element={<ThankYou />} />
       </Routes>
     </>
   )
