@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/slices/cartSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { CustomToastContainer,showAddToCartToast } from './ToastNotification';
 function ProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
@@ -28,19 +28,18 @@ function ProductDetail() {
 
     const handleAddToCart = () => {
         if (product) {
-            dispatch(addToCart({
-                id: product.id,
-                title: product.title,
-                price: product.price,
-                image: product.image,
-                quantity: quantity,
-            }));
-            toast.success(`${product.title} added to cart!`, {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 2000,
-            });
+          dispatch(addToCart({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            quantity: quantity,
+          }));
+          
+          // Use enhanced toast instead of basic toast
+          showAddToCartToast(product);
         }
-    };
+      };
 
     const handleQuantityChange = (e) => {
         setQuantity(Math.max(1, e.target.value));
@@ -79,7 +78,7 @@ function ProductDetail() {
 
     return (
         <div className="container mt-5">
-            <ToastContainer />
+            <CustomToastContainer />
             <div className="row">
                 <div className="col-md-6">
                     <img

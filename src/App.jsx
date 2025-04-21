@@ -11,6 +11,8 @@ import FakePayment from './pages/FakePayment';
 import ThankYou from './pages/ThankYou';
 import 'react-toastify/dist/ReactToastify.css';
 import Payment from './pages/Payment';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path="/details" element={<FakePayment />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </>
   )
