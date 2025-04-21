@@ -327,6 +327,7 @@ function Navbar() {
             
             /* Search Input Effects */
             .search-control {
+                color:white; !important;
                 background: rgba(55, 65, 81, 0.3) !important;
                 border: 1px solid rgba(108, 117, 125, 0.5) !important;
                 transition: all 0.3s ease !important;
