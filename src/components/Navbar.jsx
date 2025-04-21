@@ -738,15 +738,6 @@ function Navbar() {
                                                 <div className="fw-bold">{currentUser.displayName || 'Welcome'}</div>
                                                 <div className="small text-light-50">{currentUser.email}</div>
                                             </div>
-{/*                                             <Link to="/profile" className="user-menu-item text-light text-decoration-none">
-                                                <i className="bi bi-person"></i> My Profile
-                                            </Link>
-                                            <Link to="/orders" className="user-menu-item text-light text-decoration-none">
-                                                <i className="bi bi-box"></i> My Orders
-                                            </Link>
-                                            <Link to="/wishlist" className="user-menu-item text-light text-decoration-none">
-                                                <i className="bi bi-heart"></i> Wishlist
-                                            </Link> */}
                                             <div
                                                 className="user-menu-item text-light"
                                                 onClick={handleLogout}>
