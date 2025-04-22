@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/slices/cartSlice';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CustomToastContainer,showAddToCartToast } from './ToastNotification';
+import { CustomToastContainer, showAddToCartToast } from './ToastNotification';
+import { useAuth } from '../context/AuthContext';
+
 function ProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
@@ -14,8 +16,8 @@ function ProductDetail() {
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(5);
     const dispatch = useDispatch();
-
-    const cartItems = useSelector((state) => state.cart.items);
+    const navigate = useNavigate();
+    const { currentUser } = useAuth();
 
     useEffect(() => {
         axios.get(`https://e-commerce-api-jsjh.onrender.com/products/${id}`)
@@ -28,18 +30,39 @@ function ProductDetail() {
 
     const handleAddToCart = () => {
         if (product) {
-          dispatch(addToCart({
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            image: product.image,
-            quantity: quantity,
-          }));
-          
-          // Use enhanced toast instead of basic toast
-          showAddToCartToast(product);
+            dispatch(addToCart({
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                image: product.image,
+                quantity: quantity,
+            }));
+
+            // Use enhanced toast instead of basic toast
+            showAddToCartToast(product);
         }
-      };
+    };
+
+    const handleBuyNow = () => {
+        if (product) {
+            dispatch(addToCart({
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                image: product.image,
+                quantity: quantity,
+            }));
+
+            // Check if user is logged in before proceeding to checkout
+            if (!currentUser) {
+                toast.info('Please login to continue with your purchase');
+                navigate('/login?redirect=/details');
+                return;
+            }
+
+            navigate('/details');
+        }
+    };
 
     const handleQuantityChange = (e) => {
         setQuantity(Math.max(1, e.target.value));
@@ -114,13 +137,23 @@ function ProductDetail() {
                         />
                     </div>
 
-                    <button
-                        onClick={handleAddToCart}
-                        className={`btn ${product.stock === 0 ? 'btn-secondary' : 'btn-primary'} btn-lg w-100`}
-                        disabled={product.stock === 0}
-                    >
-                        {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
-                    </button>
+                    <div className="d-flex gap-2">
+                        <button
+                            onClick={handleAddToCart}
+                            className={`btn ${product.stock === 0 ? 'btn-secondary' : 'btn-primary'} flex-grow-1`}
+                            disabled={product.stock === 0}
+                        >
+                            {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                        </button>
+
+                        <button
+                            onClick={handleBuyNow}
+                            className={`btn ${product.stock === 0 ? 'btn-secondary' : 'btn-warning'} flex-grow-1`}
+                            disabled={product.stock === 0}
+                        >
+                            Buy Now
+                        </button>
+                    </div>
                 </div>
             </div>
 

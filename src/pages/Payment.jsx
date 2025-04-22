@@ -38,7 +38,7 @@ const Payment = () => {
                 <div className="mb-3">
                     <label className="form-label">Card Number</label>
                     <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         name="cardNumber"
                         placeholder="1234 5678 9012 3456"

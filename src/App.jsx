@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Payment from './pages/Payment';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -25,14 +26,26 @@ function App() {
         <Route path="/add" element={<AddProduct />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/category/:categoryName" element={<CategoryProducts />} />
-        <Route path="/details" element={<FakePayment />} />
-        <Route path="/thank-you" element={<ThankYou />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/details" element={
+          <ProtectedRoute>
+            <FakePayment />
+          </ProtectedRoute>
+        } />
+        <Route path="/thank-you" element={
+          <ProtectedRoute>
+            <ThankYou />
+          </ProtectedRoute>
+        } />
+        <Route path="/payment" element={
+          <ProtectedRoute>
+            <Payment />
+          </ProtectedRoute>
+        } />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

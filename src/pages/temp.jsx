@@ -1,13 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/slices/cartSlice';
 import { CustomToastContainer, showAddToCartToast } from './ToastNotification';
-import { useAuth } from '../context/AuthContext';
-import { toast } from 'react-toastify';
 
 function Home() {
     const [products, setProducts] = useState([]);
@@ -16,7 +14,6 @@ function Home() {
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { currentUser } = useAuth();
 
     useEffect(() => {
         const loadAllReviews = () => {
@@ -106,14 +103,6 @@ function Home() {
             image: product.image,
             quantity: 1,
         }));
-
-        // Check if user is logged in before proceeding to checkout
-        if (!currentUser) {
-            toast.info('Please login to continue with your purchase');
-            navigate('/login?redirect=/details');
-            return;
-        }
-
         navigate('/details');
     };
 
